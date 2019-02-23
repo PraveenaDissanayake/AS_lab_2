@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    var vehicleName = 'Toyota';
+
+    function printVehicleNameOuter() {
+        console.log(this.vehicleName)
+    }
+
+    console.log(this);
+    printVehicleNameOuter();
+
+    var vehicle = {
+        vehicleName: 'Nissan',
+        printVehicleNameInner: function () {
+            return function () {
+                console.log(this.vehicleName)
+            }
+        }
+
+    };
+    var execute = vehicle.printVehicleNameInner().bind(vehicle);
+    execute;
+
+    function taxCalculator(tax) {
+        var taxPercentage = tax;
+        return function (amount) {
+            return amount * tax/ 100
+        }
+    }
+
+    var calculator = taxCalculator(10);
+    console.log(calculator(90))
+</script>
+
+</body>
+</html>
